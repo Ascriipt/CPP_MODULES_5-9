@@ -53,4 +53,6 @@ private:
 
 };
 
+//the problem was me doing : std::cout << *bureaucrat_name instead of : std::cout << bureaucrat_name since I use a reference and not a pointer
+
 std::ostream	&operator<<( std::ostream &o, const Bureaucrat &curr );

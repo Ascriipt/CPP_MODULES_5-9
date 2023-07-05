@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:14:29 by maparigi          #+#    #+#             */
-/*   Updated: 2023/07/05 14:10:04 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/07/05 14:32:48 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main(void)
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
+		std::cout << *a;
 
 		try // in my opinion would make more sense if the try-catch blocks would have been inside the class itself already
 		{
@@ -57,7 +57,7 @@ int main(void)
 			" failed: " << e.what() << "\033[0m" << std::endl;
 		}
 
-		std::cout << a;
+		std::cout << *a;
 
 		try
 		{
@@ -69,7 +69,7 @@ int main(void)
 			" failed: " << e.what() << "\033[0m" << std::endl;
 		}
 
-		std::cout << a;
+		std::cout << *a;
 
 		try
 		{
@@ -81,7 +81,7 @@ int main(void)
 			" failed: " << e.what() << "\033[0m" << std::endl;
 		}
 
-		std::cout << a;
+		std::cout << *a;
 		std::cout << std::endl;
 
 		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
@@ -95,7 +95,7 @@ int main(void)
 		Bureaucrat *a = new Bureaucrat(1);
 		std::cout << std::endl;
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
+		std::cout << *a;
 
 		try
 		{
@@ -107,7 +107,7 @@ int main(void)
 			" failed: " << e.what() << "\033[0m" << std::endl;
 		}
 
-		std::cout << a;
+		std::cout << *a;
 
 		try
 		{
@@ -119,7 +119,7 @@ int main(void)
 			" failed: " << e.what() << "\033[0m" << std::endl;
 		}
 
-		std::cout << a;
+		std::cout << *a;
 
 		try
 		{
@@ -131,7 +131,7 @@ int main(void)
 			" failed: " << e.what() << "\033[0m" << std::endl;
 		}
 
-		std::cout << a;
+		std::cout << *a;
 		std::cout << std::endl;
 
 		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
@@ -196,11 +196,11 @@ int main(void)
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting a\033[0m" << std::endl;
-		std::cout << a;
+		std::cout << *a;
 
 		a->decrementGrade();
 
-		std::cout << a;
+		std::cout << *a;
 		std::cout << std::endl;
 
 		std::cout << "\033[34mConstructing b\033[0m" << std::endl;
@@ -212,9 +212,9 @@ int main(void)
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting b\033[0m" << std::endl;
-		std::cout << b;
+		std::cout << *b;
 		b->decrementGrade();
-		std::cout << b;
+		std::cout << *b;
 		std::cout << std::endl;
 
 		std::cout << "\033[34mDeconstructing b\033[0m" << std::endl;

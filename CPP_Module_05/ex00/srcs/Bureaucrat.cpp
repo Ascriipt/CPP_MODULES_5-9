@@ -45,7 +45,7 @@ Bureaucrat& Bureaucrat::operator=( const Bureaucrat &old ) {
 	return *this;
 }
 
-Bureaucrat::Bureaucrat() : _name("Bureaucrat"), _grade(150) {
+Bureaucrat::Bureaucrat() : _name("default"), _grade(150) {
 	try {
 		this->setGrade(150);
 	} catch (std::exception &e) {
@@ -54,7 +54,7 @@ Bureaucrat::Bureaucrat() : _name("Bureaucrat"), _grade(150) {
 	std::cout << "Bureaucrat Default Constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat( int grade ) {
+Bureaucrat::Bureaucrat( int grade ) : _name("default") {
 	try {
 		this->setGrade(grade);
 	} catch (std::exception &e)  {
@@ -71,7 +71,7 @@ Bureaucrat::Bureaucrat( std::string name, int grade ) : _name(name) {
 	std::cout << "Bureaucrat Constructor called for " << _name << '.' << std::endl;
 }
 
-Bureaucrat::Bureaucrat( const Bureaucrat &old ) {
+Bureaucrat::Bureaucrat( const Bureaucrat &old ) : _name(old.getName() + "_new") {
 	std::cout << "Bureaucrat Copy Constructor called." << std::endl;
 	(*this) = old;
 }
