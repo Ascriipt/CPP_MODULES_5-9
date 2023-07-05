@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#pragma once
 
 # include <iostream>
 # include <string>
@@ -22,7 +21,8 @@ class Bureaucrat
 public:
 
 	Bureaucrat();
-	Bureaucrat( std::string type, int grade );
+	Bureaucrat( int grade );
+	Bureaucrat( std::string name, int grade );
 	Bureaucrat( const Bureaucrat &old );
 	~Bureaucrat();
 
@@ -53,4 +53,4 @@ private:
 
 };
 
-#endif
+std::ostream	&operator<<( std::ostream &o, const Bureaucrat &curr );

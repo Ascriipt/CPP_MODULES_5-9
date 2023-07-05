@@ -54,7 +54,15 @@ Bureaucrat::Bureaucrat() : _name("Bureaucrat"), _grade(150) {
 	std::cout << "Bureaucrat Default Constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat( std::string name, int grade ) : _name(name), _grade(grade) {
+Bureaucrat::Bureaucrat( int grade ) {
+	try {
+		this->setGrade(grade);
+	} catch (std::exception &e)  {
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+Bureaucrat::Bureaucrat( std::string name, int grade ) : _name(name) {
 	try {
 		this->setGrade(grade);
 	} catch (std::exception &e) {
@@ -82,4 +90,9 @@ void			Bureaucrat::decrementGrade() {
 	if (_grade + 1 > 150)
 		throw Bureaucrat::GradeTooLowException();
 	_grade++;
+}
+
+std::ostream	&operator<<( std::ostream &o, const Bureaucrat &curr ) {
+	o << curr.getName() << ", bureaucrat grade " << curr.getGrade() << '.' << std::endl;
+	return o;
 }
