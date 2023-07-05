@@ -6,7 +6,7 @@
 #    By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 18:52:45 by maparigi          #+#    #+#              #
-#    Updated: 2023/05/04 18:59:59 by maparigi         ###   ########.fr        #
+#    Updated: 2023/07/05 12:46:16 by maparigi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,16 +25,12 @@ Blink=\033[5m
 Bold=\033[1m
 #---------------------------#
 
-NAME = Animal
+NAME = Bureaucrat
 
 CC = c++
 
 SRC =	./srcs/main.cpp \
-		./srcs/Animal.cpp \
-		./srcs/Dog.cpp \
-		./srcs/Cat.cpp \
-		./srcs/WrongAnimal.cpp \
-		./srcs/WrongCat.cpp	\
+		./srcs/Bureaucrat.cpp
 
 OBJ = ${SRC:.cpp=.o}
 DEPS = ${SRC:.cpp=.d}

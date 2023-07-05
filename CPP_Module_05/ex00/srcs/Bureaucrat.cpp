@@ -12,24 +12,54 @@
 
 #include "Bureaucrat.hpp"
 
+void	Bureaucrat::setGrade( int grade ) {
+	if (grade < 1)
+		throw Bureaucrat::GradeTooHighException();
+	else if (grade > 150)
+		throw Bureaucrat::GradeTooLowException();
+	else
+		_grade = grade;
+}
+
+std::string const	Bureaucrat::getName() const {
+	return _name;
+}
+
+int 				Bureaucrat::getGrade() const {
+	return _grade;
+}
+
+const char*	Bureaucrat::GradeTooLowException::what() const throw() {
+	return "Grade is too low.";
+}
+
+const char*	Bureaucrat::GradeTooHighException::what() const throw() {
+	return "Grade is too high.";
+}
+
 Bureaucrat& Bureaucrat::operator=( const Bureaucrat &old ) {
 	std::cout << "Bureaucrat Assignment operator called for Bureaucrat." << std::endl;
 	if (this != &old) {
-		_name = old.getName();
 		_grade = old.getGrade();
 	}
 	return *this;
 }
 
 Bureaucrat::Bureaucrat() : _name("Bureaucrat"), _grade(150) {
+	try {
+		this->setGrade(150);
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 	std::cout << "Bureaucrat Default Constructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat( std::string name, int grade ) : _name(name), _grade(grade) {
-	if (grade < 1)
-		throw Bureaucrat::GradeTooHighException();
-	else if (grade > 150)
-		throw Bureaucrat::GradeTooLowException();
+	try {
+		this->setGrade(grade);
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 	std::cout << "Bureaucrat Constructor called for " << _name << '.' << std::endl;
 }
 
@@ -42,10 +72,14 @@ Bureaucrat::~Bureaucrat() {
 	std::cout << "Bureaucrat Default Destructor called for " << _name << '.' << std::endl;
 }
 
-Bureaucrat::GradeTooHighException::GradeTooHighException() {
-	std::cout << "GradeToohigh exception thrown." << std::endl;
+void			Bureaucrat::incrementGrade() {
+	if (_grade - 1 < 1)
+		throw Bureaucrat::GradeTooHighException();
+	_grade--;
 }
 
-Bureaucrat::GradeTooLowException::GradeTooLowException() {
-	std::cout << "GradeToolow exception thrown." << std::endl;
+void			Bureaucrat::decrementGrade() {
+	if (_grade + 1 > 150)
+		throw Bureaucrat::GradeTooLowException();
+	_grade++;
 }
