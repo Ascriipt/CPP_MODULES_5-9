@@ -12,6 +12,18 @@
 
 #include "Bureaucrat.hpp"
 
+void	Bureaucrat::signForm( Form &form ) {
+	try {
+		form.beSigned(*this);
+	} catch (Form::GradeTooLowException &e) {
+		std::cout << _name << " couldn't sign " << form.getName() << " because " << e.what() << "." << std::endl; 
+	}
+	if (form.getStatus() != 1)
+		std::cout << _name << " signed " << form.getName() << std::endl;
+	else
+		std::cout << _name << " couldn't sign " << form.getName() << " because it is already signed" << std::endl;
+}
+
 void	Bureaucrat::setGrade( int grade ) {
 	if (grade < 1)
 		throw Bureaucrat::GradeTooHighException();
@@ -39,7 +51,7 @@ const char*	Bureaucrat::GradeTooHighException::what() const throw() {
 
 Bureaucrat& Bureaucrat::operator=( const Bureaucrat &old ) {
 	std::cout << "Bureaucrat Assignment operator called for Bureaucrat." << std::endl;
-	if (this != &old) {
+	if ( this != &old ) {
 		_grade = old.getGrade();
 	}
 	return *this;
