@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 17:18:24 by maparigi          #+#    #+#             */
-/*   Updated: 2023/07/10 19:47:53 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/07/10 19:51:27 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ShrubberyCreationForm::execute( Bureaucrat const & executor ) {
 		Shrubfile << "                  dHHHb" << std::endl;
 		Shrubfile << "                .dFd|bHb.               o" << std::endl;
 		Shrubfile << "      o       .dHFdH|HbTHb.          o /" << std::endl;
-		Shrubfile << "\\  Y  |  \\__,dHHFdHH|HHhoHHb.__Krogg  Y" << std::endl;
+		Shrubfile << "\\  Y  |  \\__,dHHFdHH|HHhoHHb.         Y" << std::endl;
 		Shrubfile << "##########################################" << std::endl;
 		Shrubfile.close();
     }
