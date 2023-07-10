@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:34:50 by maparigi          #+#    #+#             */
-/*   Updated: 2023/07/08 20:04:49 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/07/10 15:42:25 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	Form::setStatus( bool status ) {
 	_isSigned = status;
+}
+
+const char	*Form::alreadySignedException::what() const throw() {
+	return	"The Form is already signed";
 }
 
 const char	*Form::GradeTooLowException::what() const throw() {
@@ -24,7 +28,9 @@ const char	*Form::GradeTooHighException::what() const throw() {
 	return "Grade is too high";
 }
 
-void	Form::beSigned( Bureaucrat Signatory ) {
+void	Form::beSigned( const Bureaucrat &Signatory ) {
+	if ( _isSigned == 1 )
+		throw	Form::alreadySignedException();
 	if ( Signatory.getGrade() <= getSignReq() )
 		return	setStatus(1);
 	throw	Form::GradeTooLowException();

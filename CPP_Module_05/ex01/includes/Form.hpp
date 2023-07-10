@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:16:20 by maparigi          #+#    #+#             */
-/*   Updated: 2023/07/08 20:02:02 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/07/10 15:39:30 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ class Form {
 		Form( const Form &old );
 		~Form();
 
+		class alreadySignedException {
+			public:
+				virtual const char* what() const throw();
+		};
+		
 		class GradeTooHighException {
 			public:
 				virtual const char* what() const throw();
@@ -42,7 +47,7 @@ class Form {
 		int					getSignReq() const;
 		int					getExecReq() const;
 
-		void	beSigned( Bureaucrat signatory );
+		void	beSigned( const Bureaucrat &signatory );
 		
 		void	setStatus( bool status );
 };
