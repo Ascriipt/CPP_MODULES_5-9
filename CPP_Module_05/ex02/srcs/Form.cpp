@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:34:50 by maparigi          #+#    #+#             */
-/*   Updated: 2023/07/10 15:42:25 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/07/11 16:02:54 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	Form::setStatus( bool status ) {
 	_isSigned = status;
+}
+
+const char	*Form::notSignedException::what() const throw() {
+	return	"The Form isn't signed yet";
 }
 
 const char	*Form::alreadySignedException::what() const throw() {

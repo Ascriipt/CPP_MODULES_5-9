@@ -50,6 +50,7 @@ public:
 	void				decrementGrade();
 
 	void				signForm( Form &form );
+	void				executeForm( Form const & form ) const;
 private:
 
 	std::string const	_name;

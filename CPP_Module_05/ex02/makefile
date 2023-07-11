@@ -6,7 +6,7 @@
 #    By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 18:52:45 by maparigi          #+#    #+#              #
-#    Updated: 2023/07/10 19:01:42 by maparigi         ###   ########.fr        #
+#    Updated: 2023/07/11 17:28:12 by maparigi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,8 @@ SRC =	./srcs/main.cpp \
 		./srcs/Bureaucrat.cpp \
 		./srcs/Form.cpp \
 		./srcs/ShrubberyCreationForm.cpp \
-		#./srcs/RobotomyRequestForm.cpp \
-		#./srcs/PresidentialPardonForm.cpp \
+		./srcs/RobotomyRequestForm.cpp \
+		./srcs/PresidentialPardonForm.cpp \
 
 OBJ = ${SRC:.cpp=.o}
 DEPS = ${SRC:.cpp=.d}

@@ -12,6 +12,14 @@
 
 #include "Bureaucrat.hpp"
 
+void    Bureaucrat::executeForm( const Form& form ) const {
+    try {
+        form.execute( *this );
+    } catch ( std::exception& e ) {
+        std::cout << _name << " couldn't execute " << form.getName() << " because " << e.what() << std::endl;
+    }
+}
+
 void	Bureaucrat::signForm( Form &form ) {
 	try {
 		form.beSigned(*this);

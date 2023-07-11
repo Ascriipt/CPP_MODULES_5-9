@@ -6,9 +6,11 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 17:10:20 by maparigi          #+#    #+#             */
-/*   Updated: 2023/07/10 19:47:27 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/07/11 17:27:23 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma once
 
 #include "Form.hpp"
 
@@ -24,7 +26,5 @@ class ShrubberyCreationForm : public Form {
 
 		ShrubberyCreationForm	&operator=( const ShrubberyCreationForm &old );
 
-		std::string	getTarget();
-
-		void		execute( Bureaucrat const & executor );
+		void		execute( Bureaucrat const & executor ) const;
 };

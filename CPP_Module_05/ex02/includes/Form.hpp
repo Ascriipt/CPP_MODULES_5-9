@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:16:20 by maparigi          #+#    #+#             */
-/*   Updated: 2023/07/10 19:09:45 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/07/11 17:34:43 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,29 @@ class Form {
 		Form();
 		Form( std::string Name, int signReq, int execReq, bool isSigned );
 		Form( const Form &old );
-		~Form();
+		virtual	~Form();
 
-		class alreadySignedException {
-			public:
-				virtual const char* what() const throw();
-		};
-		
-		class GradeTooHighException {
-			public:
-				virtual const char* what() const throw();
-		};
-		
-		class GradeTooLowException {
+		class notSignedException : public std::exception {
 			public:
 				virtual const char* what() const throw();
 		};
 
-		virtual void		execute( const Bureaucrat & executor ) = 0;
+		class alreadySignedException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+		
+		class GradeTooHighException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+		
+		class GradeTooLowException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+
+		virtual void		execute( const Bureaucrat & executor ) const = 0;
 
 		std::string const	getName() const;
 		bool				getStatus() const;

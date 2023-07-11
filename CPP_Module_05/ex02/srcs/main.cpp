@@ -6,61 +6,61 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:14:29 by maparigi          #+#    #+#             */
-/*   Updated: 2023/07/10 19:13:14 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/07/11 17:31:49 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
-int main(void)
+int main()
 {
+	ShrubberyCreationForm s("Shrubbery");
+	RobotomyRequestForm r("Robotomy");
+	PresidentialPardonForm p("Presidential");
+	Bureaucrat b("bureaucrat", 50);
+
+	try
 	{
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Bureaucrat *a = new Bureaucrat();
-		std::cout << std::endl;
-
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << *a;
-
-		std::cout << std::endl;
-
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-		delete a;
-		std::cout << std::endl;
+		b.executeForm(s);
+		b.executeForm(r);
+		b.executeForm(p);
 	}
-	std::cout << "-------------------------------------------------------" << std::endl;
+	catch (std::exception &e)
 	{
-		std::cout << std::endl;
-
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Bureaucrat *a = new Bureaucrat("Assistant", 145);
-		Bureaucrat *b = new Bureaucrat("CEO", 1);
-		ShrubberyCreationForm	shrub( "prout" );
-		std::cout << std::endl;
-
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << *a;
-		std::cout << *b;
-
-		try {
-			shrub.execute(*b);
-		} catch(Form::GradeTooLowException &e) {
-			std::cerr << e.what() << std::endl;
-		} catch(Form::alreadySignedException &e) {
-			std::cerr << e.what() << std::endl;
-		}
-
-		// Assistant signs the Form
-
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-		delete a;
-		delete b;
-		std::cout << std::endl;
+		std::cout << e.what() << std::endl;
 	}
-	std::cout << "-------------------------------------------------------" << std::endl;
+	std::cout << "---------------------" << std::endl;
+		try
 	{
+		s.beSigned(b);
+		r.beSigned(b);
+		p.beSigned(b);
+		b.executeForm(s);
+		b.executeForm(r);
+		b.executeForm(p);
 	}
-	return (0);
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+
+	std::cout << "---------------------" << std::endl;
+		try
+	{
+		s.beSigned(b);
+		std::cout << "+++++++++++" << std::endl;
+		b.executeForm(s);
+		b.executeForm(r);
+		b.executeForm(p);
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+
+	return 0;
 }
