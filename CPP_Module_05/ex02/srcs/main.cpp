@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: red <red@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:14:29 by maparigi          #+#    #+#             */
-/*   Updated: 2023/07/11 17:31:49 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/07/12 12:46:35 by red              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main()
 	ShrubberyCreationForm s("Shrubbery");
 	RobotomyRequestForm r("Robotomy");
 	PresidentialPardonForm p("Presidential");
-	Bureaucrat b("bureaucrat", 50);
+	Bureaucrat b("bureaucrat", 2);
 
 	try
 	{
