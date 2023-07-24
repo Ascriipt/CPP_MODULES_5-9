@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+         #
+#    By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 18:52:45 by maparigi          #+#    #+#              #
-#    Updated: 2023/07/14 16:33:41 by maparigi         ###   ########.fr        #
+#    Updated: 2023/07/24 18:11:33 by emaugale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,7 @@ NAME = Bureaucrat
 CC = c++
 
 SRC =	./srcs/main.cpp \
-		./srcs/Bureaucrat.cpp \
-		./srcs/Form.cpp \
-		./srcs/ShrubberyCreationForm.cpp \
-		./srcs/RobotomyRequestForm.cpp \
-		./srcs/PresidentialPardonForm.cpp \
-		./srcs/Intern.cpp \
+		./srcs/ScalarConverter.cpp \
 
 OBJ = ${SRC:.cpp=.o}
 DEPS = ${SRC:.cpp=.d}
