@@ -1,5 +1,19 @@
 #include "ScalarConverter.hpp"
 
+std::string	ScalarConverter::hasNoMantissaFloat( float f ) {
+	std::cout << f;
+	if (!(std::abs(f - trunc(f)) < 1e-5) && !(std::abs(f - trunc(f)) < 1e-4))
+		return	"f";
+	return	".0f";
+}
+
+std::string	ScalarConverter::hasNoMantissaDouble( double d ) {
+	std::cout << d;
+	if (!(std::abs(d - trunc(d)) < 1e-5) && !(std::abs(d - trunc(d)) < 1e-4))
+		return	"";
+	return	".0";
+}
+
 std::string	ScalarConverter::isPrintableChar( char c ) {
 	if (c >= 33 && c <= 126) {
 		std::cout << c;
@@ -9,31 +23,35 @@ std::string	ScalarConverter::isPrintableChar( char c ) {
 }
 
 void    ScalarConverter::convertFromInt( int x ) {
-	std::cout << "char : " << isPrintableChar(static_cast<char>(x)) << std::endl;
-	std::cout << "int : " << x << std::endl;
-	std::cout << "float : " << static_cast<float>(x) << ".0f" << std::endl;
-	std::cout << "double : " << static_cast<double>(x) << ".0" << std::endl;
+	std::cout << "\033[0;32mchar : " << isPrintableChar(static_cast<char>(x)) << std::endl;
+	std::cout << "\033[0;33mint : " << x << std::endl;
+	std::cout << "\033[0;34mfloat : " << hasNoMantissaFloat(static_cast<float>(x)) << std::endl;
+	std::cout << "\033[1;35mdouble : " << hasNoMantissaDouble(static_cast<double>(x)) << std::endl;
+	std::cout << "\033[0m";
 }
 
 void    ScalarConverter::convertFromChar( char c ) {
-	std::cout << "char : " << c << std::endl;
-	std::cout << "int : " << static_cast<int>(c) << std::endl;
-	std::cout << "float : " << static_cast<float>(c) << ".0f" << std::endl;
-	std::cout << "double : " << static_cast<double>(c) << ".0" << std::endl;
+	std::cout << "\033[0;32mchar : " << c << std::endl;
+	std::cout << "\033[0;33mint : " << static_cast<int>(c) << std::endl;
+	std::cout << "\033[0;34mfloat : " << hasNoMantissaFloat(static_cast<float>(c)) << std::endl;
+	std::cout << "\033[1;35mdouble : " << hasNoMantissaDouble(static_cast<double>(c)) << std::endl;
+	std::cout << "\033[0m";
 }
 
 void    ScalarConverter::convertFromFloat( float f ) {
-	std::cout << "char : " << isPrintableChar(static_cast<char>(f)) << std::endl;
-	std::cout << "int : " << static_cast<int>(f) << std::endl;
-	std::cout << "float : " << f << "f" << std::endl;
-	std::cout << "double : " << static_cast<double>(f) << std::endl;
+	std::cout << "\033[0;32mchar : " << isPrintableChar(static_cast<char>(f)) << std::endl;
+	std::cout << "\033[0;33mint : " << static_cast<int>(f) << std::endl;
+	std::cout << "\033[0;34mfloat : " << hasNoMantissaFloat(f) << std::endl;
+	std::cout << "\033[1;35mdouble : " << hasNoMantissaDouble(static_cast<double>(f)) << std::endl;
+	std::cout << "\033[0m";
 }
 
 void    ScalarConverter::convertFromDouble( double d ) {
-	std::cout << "char : " << isPrintableChar(static_cast<char>(d)) << std::endl;
-	std::cout << "int : " << static_cast<int>(d) << std::endl;
-	std::cout << "float : " << static_cast<float>(d) << "f" << std::endl;
-	std::cout << "double : " << d << std::endl;
+	std::cout << "\033[0;32mchar : " << isPrintableChar(static_cast<char>(d)) << std::endl;
+	std::cout << "\033[0;33mint : " << static_cast<int>(d) << std::endl;
+	std::cout << "\033[0;34mfloat : " << hasNoMantissaFloat(static_cast<float>(d)) << std::endl;
+	std::cout << "\033[1;35mdouble : " << hasNoMantissaDouble(d) << std::endl;
+	std::cout << "\033[0m";
 }
 
 bool isChar( const std::string &input ) {
@@ -77,6 +95,6 @@ void    ScalarConverter::converter( const std::string &input ) {
 		// std::cout << "the input is a char" << std::endl;
 		convertFromChar(input[0]);
 	} else {
-		std::cout << "input is not valid" << std::endl;
+		std::cout << "\033[1;31minput is not valid\033[0m" << std::endl;
 	}
 }

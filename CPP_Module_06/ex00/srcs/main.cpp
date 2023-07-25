@@ -1,7 +1,5 @@
 #include "ScalarConverter.hpp"
 
 int main(int ac, char **av) {
-    for (int i = 1; i < ac; i++) {
-        ScalarConverter::converter(av[i]);
-    }
+    if (ac >= 2) ScalarConverter::converter(av[1]);
 }

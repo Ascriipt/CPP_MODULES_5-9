@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: red <red@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:37:42 by maparigi          #+#    #+#             */
-/*   Updated: 2023/07/25 15:27:16 by red              ###   ########.fr       */
+/*   Updated: 2023/07/25 17:05:48 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+# include <cmath>
 # include <string>
 # include <cerrno>
 # include <cstdlib>
@@ -38,4 +39,7 @@ class ScalarConverter {
 		static void convertFromDouble( double d );
 
 		static std::string	isPrintableChar( char c );
+
+		static std::string	hasNoMantissaFloat( float f );
+		static std::string	hasNoMantissaDouble( double d );
 };
