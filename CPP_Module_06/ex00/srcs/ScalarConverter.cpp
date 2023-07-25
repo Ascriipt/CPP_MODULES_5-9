@@ -82,7 +82,23 @@ bool isFloat(const std::string& input) {
 void    ScalarConverter::converter( const std::string &input ) {
 	char*   end;
 
-	if (isFloat(input)) {
+	if (input == "nan" || input == "nanf" || input == "+inf" || input == "-inf") {
+		std::cout << "\033[0;32mchar : impossible" << std::endl;
+		if (input == "nan" || input == "nanf") {
+			std::cout << "\033[0;33mint : impossible" << std::endl;
+			std::cout << "\033[0;34mfloat : nanf" << std::endl;
+			std::cout << "\033[1;35mdouble : nan" << std::endl;
+			std::cout << "\033[0m";
+		}
+		if (input == "+inf" || input == "-inf") {
+			std::cout << "\033[0;33mint : " << input << std::endl;
+			std::cout << "\033[0;34mfloat : " << input << std::endl;
+			std::cout << "\033[1;35mdouble : " << input << std::endl;
+			std::cout << "\033[0m";
+		}
+
+		return	;
+	} if (isFloat(input)) {
 		// std::cout << "the input is a float" << std::endl;
 		convertFromFloat(strtof(input.c_str(), &end));
 	} else if (isDouble(input)) {
