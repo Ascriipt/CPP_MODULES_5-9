@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+         #
+#    By: red <red@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 18:52:45 by maparigi          #+#    #+#              #
-#    Updated: 2023/07/24 18:11:33 by emaugale         ###   ########.fr        #
+#    Updated: 2023/07/25 14:48:08 by red              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ Blink=\033[5m
 Bold=\033[1m
 #---------------------------#
 
-NAME = Bureaucrat
+NAME = ScalarConverter
 
 CC = c++
 

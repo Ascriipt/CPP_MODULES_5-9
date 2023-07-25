@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: red <red@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:37:42 by maparigi          #+#    #+#             */
-/*   Updated: 2023/07/24 18:42:53 by emaugale         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:27:16 by red              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,6 @@ class ScalarConverter {
 		static void convertFromChar( char c );
 		static void convertFromFloat( float f );
 		static void convertFromDouble( double d );
+
+		static std::string	isPrintableChar( char c );
 };
