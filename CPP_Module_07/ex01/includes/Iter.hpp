@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   Iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 21:44:42 by maparigi          #+#    #+#             */
-/*   Updated: 2023/07/26 21:44:43 by maparigi         ###   ########.fr       */
+/*   Created: 2023/07/26 21:44:36 by maparigi          #+#    #+#             */
+/*   Updated: 2023/07/26 21:49:19 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,8 @@
 
 template< typename T >
 
-void	swap( T &s1, T &s2 ) {
-	T	swop;
-	swop = s1;
-	s1 = s2;
-	s2 = swop;
-}
-
-template< typename T >
-
-T	min( T v1, T v2 ) {
-	return	v1 < v2 ? v1 : v2;
-}
-
-template< typename T >
-
-T	max( T v1, T v2 ) {
-	return	v1 > v2 ? v1 : v2;
+void	Iter( T *tab, int tabLength, T (*func)(T&) ) {
+	for (size_t i == 0; i < tabLength; i++) {
+		func(tab[i]);
+	}
 }
