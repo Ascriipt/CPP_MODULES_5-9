@@ -14,8 +14,15 @@
 
 template< typename T >
 
-void	Iter( T *tab, int tabLength, T (*func)(T&) ) {
-	for (size_t i == 0; i < tabLength; i++) {
+void	Iter( T *tab, size_t tabLength, void (*func)(T&) ) {
+	for (size_t i = 0; i < tabLength; i++) {
 		func(tab[i]);
 	}
+}
+
+template< typename T >
+
+void	printValue( T &data )
+{
+	std::cout << data << std::endl;
 }
