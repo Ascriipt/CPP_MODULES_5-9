@@ -3,37 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:39:07 by maparigi          #+#    #+#             */
-/*   Updated: 2023/07/26 21:40:59 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:35:08 by uniix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string>
 #include <iostream>
-#include "Iter.hpp"
+#include "Array.hpp"
 
 int	main(void)
 {
-	int			arrayInt[5] = {0, 1, 2, 3, 4};
-	std::string	arrayStr[5] = {"niq", "euhhhh", "mouk", "sashimi", "greGori"};
-	const char	*arrayStrC[5] = {"ab", "ac", "ad", "ae", "af"};
-	char		arrayChar[5] = {'t', 'g', 'm', 'g', 'l'};
-
-	Iter(arrayInt, 5, printValue);
-	std::cout << std::endl;
-	Iter(arrayInt, 2, printValue);
-	std::cout << std::endl;
-
-	Iter(arrayStr, 5, printValue);
-	std::cout << std::endl;
-
-	Iter(arrayStrC, 5, printValue);
-	std::cout << std::endl;
-
-	Iter(arrayChar, 5, printValue);
-	std::cout << std::endl;
-
+	char *	a = new char();
+	Array< int > numbers(12);
+	Array< char > cahr(11);
+	Array< std::string > strs;
+	Array< int >	suce(numbers);
+	std::cout << *a << std::endl;
+	std::cout << cahr[5] << std::endl;
+	std::cout << numbers[11] << std::endl;
+	try {
+		std::cout << numbers[12] << std::endl;
+	} catch ( std::exception &e ) {
+		std::cout << "Error : " << e.what() << std::endl;
+	}
+	delete a;
 	return (0);
 }
