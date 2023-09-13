@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
+/*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:44:36 by maparigi          #+#    #+#             */
-/*   Updated: 2023/08/30 17:35:22 by uniix            ###   ########.fr       */
+/*   Updated: 2023/09/13 12:29:51 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+#include <string>
+#include <iostream>
 template< typename T >
 
 class Array {
@@ -32,11 +34,13 @@ class Array {
 		};
 
 		Array & operator=( const Array & old ) {
-			delete []	_array;
-			_size = old._size;
-			_array = new T[_size];
-			for ( size_t i = 0; i < _size; i++ )
-				_array[i] = *old._array;
+			if ( this != &old ) {
+				delete []	_array;
+				_size = old._size;
+				_array = new T[_size];
+				for ( size_t i = 0; i < _size; i++ )
+					_array[i] = *old._array;
+			}
 			return	*this;
 		};
 		class	IndexTooLow : public std::exception {

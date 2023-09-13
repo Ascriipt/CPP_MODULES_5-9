@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
+/*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:39:07 by maparigi          #+#    #+#             */
-/*   Updated: 2023/08/30 17:35:08 by uniix            ###   ########.fr       */
+/*   Updated: 2023/09/13 12:22:45 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Array.hpp"
+
 #include <string>
 #include <iostream>
-#include "Array.hpp"
 
 int	main(void)
 {
