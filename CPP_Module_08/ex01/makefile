@@ -6,7 +6,7 @@
 #    By: uniix <uniix@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 18:52:45 by maparigi          #+#    #+#              #
-#    Updated: 2023/08/30 15:52:58 by uniix            ###   ########.fr        #
+#    Updated: 2023/09/30 21:54:59 by uniix            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,11 +25,12 @@ Blink=\033[5m
 Bold=\033[1m
 #---------------------------#
 
-NAME = Array
+NAME = span
 
 CC = c++
 
 SRC =	./srcs/main.cpp \
+		./srcs/span.cpp \
 
 OBJ = ${SRC:.cpp=.o}
 DEPS = ${SRC:.cpp=.d}

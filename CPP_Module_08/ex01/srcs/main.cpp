@@ -6,42 +6,25 @@
 /*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 19:28:14 by uniix             #+#    #+#             */
-/*   Updated: 2023/09/30 21:52:46 by uniix            ###   ########.fr       */
+/*   Updated: 2023/09/30 22:28:32 by uniix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "easyfind.hpp"
+#include "span.hpp"
 #include <iostream>
 #include <vector>
 
-int main( void )
-{
-	std::vector<int> test;
-	test.push_back(0);
-	test.push_back(2);
-	test.push_back(1);
-	test.push_back(4);
-	test.push_back(2147483647);
+int main( void ) {
+	span a(12);
 
+	a.addNumber(6);
+	a.addNumber(3);
+	a.addNumber(17);
+	a.addNumber(9);
+	a.addNumber(11);
 
-	try
-	{
-		(void)easyfind(test, 21);
-	}
-	catch (const std::exception& e)
-	{
-		std::cout << "number not found" << std::endl;
-	}
-	std::cout << *easyfind(test, 4) << std::endl << *easyfind(test, 2) << std::endl;
-	std::cout << *easyfind(test, 1) << std::endl << *easyfind(test, 2147483647) << std::endl;
+	std::cout << a.shortestSpan() << std::endl;
+	std::cout << a.longestSpan() << std::endl;
 
-	std::vector<float>	test2;
-	try
-	{
-		std::cout << *easyfind(test2, 6) << std::endl;
-	}
-	catch (const std::exception& e)
-	{
-		std::cout << "empty vector" << std::endl;
-	}
+	return (0);
 }
