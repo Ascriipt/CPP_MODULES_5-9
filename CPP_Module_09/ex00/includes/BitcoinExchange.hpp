@@ -6,7 +6,7 @@
 /*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:04:38 by uniix             #+#    #+#             */
-/*   Updated: 2023/10/06 14:45:40 by uniix            ###   ########.fr       */
+/*   Updated: 2023/10/06 17:06:13 by uniix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,23 @@
 class BitcoinExchange {
 	private:
 		std::map<std::string, std::string> _data;
+		std::map<std::string, std::string > _input;
 
-		BitcoinExchange( const BitcoinExchange &old );
+		BitcoinExchange();
+		BitcoinExchange( const BitcoinExchange & old );
 		BitcoinExchange & operator=( const BitcoinExchange & old );
 	public:
-		BitcoinExchange();
+		BitcoinExchange( std::string input );
 		~BitcoinExchange();
-		
+
 		class BadFormat : std::exception {
 			public:
 				virtual const char* what() const throw() {
 					return	("Format Error\n");
 				};
 		};
-		void	printCSVStored();
+		void	Init();
+		void	matchData( std::string );
 };
 
 // grave c'est exactement mon wallet en plus
