@@ -6,13 +6,14 @@
 /*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:30:37 by red               #+#    #+#             */
-/*   Updated: 2023/09/30 22:08:02 by uniix            ###   ########.fr       */
+/*   Updated: 2023/10/06 15:11:25 by uniix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <vector>
+#include <cstdlib>
 #include <iostream>
 #include <exception>
 #include <stdexcept>

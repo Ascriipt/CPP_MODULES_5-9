@@ -6,7 +6,7 @@
 /*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 19:51:21 by uniix             #+#    #+#             */
-/*   Updated: 2023/09/30 22:33:48 by uniix            ###   ########.fr       */
+/*   Updated: 2023/10/06 15:09:44 by uniix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,25 @@ void    span::addNumber( int N ) {
         throw span::tooManyStoredIntegers();
 };
 
-int     span::longestSpan() {
-    int max;
-    int min;
+int span::longestSpan() {
+    int max = _integers[0];
+    int min = _integers[0];
 
-    if (_integers.size() < 2)
-        throw   tooFewStoredIntegers();
-    max = _integers[0];
-    min = _integers[0];
-    for (int num : _integers) {
+	if (_integers.size() < 2)
+		throw tooFewStoredIntegers();
+
+    std::vector<int>::const_iterator it = _integers.begin();
+
+    for (; it != _integers.end(); ++it) {
+        int num = *it;
         if (num > max)
             max = num;
         if (num < min)
             min = num;
     }
-    return ( max - min );
-};
+
+    return max - min;
+}
 
 int     span::shortestSpan() {
     int sspan;

@@ -6,7 +6,7 @@
 #    By: uniix <uniix@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 18:52:45 by maparigi          #+#    #+#              #
-#    Updated: 2023/09/27 19:37:10 by uniix            ###   ########.fr        #
+#    Updated: 2023/10/06 15:03:54 by uniix            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ DEPS = ${SRC:.cpp=.d}
 
 INC = ./includes
 
-CPPFLAGS = -Wall -Wextra -Werror -g3 -MMD
+CPPFLAGS = -Wall -Wextra -Werror -g3 -MMD -std=c++98
 
 .cpp.o:
 	${CC} ${CPPFLAGS} -I${INC} -c $< -o ${<:.cpp=.o}
