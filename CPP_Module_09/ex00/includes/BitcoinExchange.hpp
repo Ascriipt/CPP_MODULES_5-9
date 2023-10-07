@@ -6,7 +6,7 @@
 /*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:04:38 by uniix             #+#    #+#             */
-/*   Updated: 2023/10/07 18:40:01 by uniix            ###   ########.fr       */
+/*   Updated: 2023/10/07 23:52:54 by uniix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,17 @@
 
 class BitcoinExchange {
 	private:
-		std::map<std::string, std::string> _data;
-		std::map<std::string, std::string > _input;
+		std::multimap<std::string, std::string> _data;
+		std::multimap<std::string, std::string > _input;
 
 		BitcoinExchange();
 		BitcoinExchange( const BitcoinExchange & old );
 		BitcoinExchange & operator=( const BitcoinExchange & old );
+		
+		bool	isValidDateFormat( const std::string & date );
+		void	checkFormat( const std::multimap<std::string, std::string>::iterator & one );
+		void	matchOneData( const std::multimap<std::string, std::string>::iterator & one );
+
 	public:
 		BitcoinExchange( std::string input );
 		~BitcoinExchange();
@@ -40,9 +45,11 @@ class BitcoinExchange {
 		};
 		void	Init();
 		void	printData();
-		void	matchData( std::string );
+		void	matchData();
 };
 
 // grave c'est exactement mon wallet en plus
 
 // putain batard tu fais le cpp 09, si t'etais en vrai chad tu ferais ft_containers (have fun askip le 09 est un peu chiant mais ca va)
+
+// jsuis un maxi chad je l'ai deja fait avec mes doigts dans le cul en fete 

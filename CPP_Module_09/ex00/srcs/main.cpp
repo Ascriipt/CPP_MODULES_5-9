@@ -6,7 +6,7 @@
 /*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 19:28:14 by uniix             #+#    #+#             */
-/*   Updated: 2023/10/07 18:45:03 by uniix            ###   ########.fr       */
+/*   Updated: 2023/10/07 23:50:00 by uniix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ int main( int ac, char **av ) {
 		return	1;
 	}
 	BitcoinExchange a(av[1]);
-	a.printData();
+	// a.printData();
 }
