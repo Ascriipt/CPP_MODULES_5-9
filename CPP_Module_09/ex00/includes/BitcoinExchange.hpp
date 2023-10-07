@@ -6,7 +6,7 @@
 /*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:04:38 by uniix             #+#    #+#             */
-/*   Updated: 2023/10/06 17:06:13 by uniix            ###   ########.fr       */
+/*   Updated: 2023/10/07 18:40:01 by uniix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ class BitcoinExchange {
 				};
 		};
 		void	Init();
+		void	printData();
 		void	matchData( std::string );
 };
 
 // grave c'est exactement mon wallet en plus
+
+// putain batard tu fais le cpp 09, si t'etais en vrai chad tu ferais ft_containers (have fun askip le 09 est un peu chiant mais ca va)

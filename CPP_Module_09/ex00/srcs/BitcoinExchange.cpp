@@ -6,7 +6,7 @@
 /*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 19:51:21 by uniix             #+#    #+#             */
-/*   Updated: 2023/10/06 17:10:02 by uniix            ###   ########.fr       */
+/*   Updated: 2023/10/07 18:45:16 by uniix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,17 @@ void	BitcoinExchange::Init() {
 		format >> mapbuff[0];
 		format >> mapbuff[1];
 		_data[mapbuff[0]] = mapbuff[1];
-		std::cout << mapbuff[0] << " () " << mapbuff[1] << std::endl;
+		// std::cout << mapbuff[0] << " () " << mapbuff[1] << std::endl;
 	};
+	data.close();
+};
+
+void	BitcoinExchange::printData() {
+	std::map<std::string, std::string>::iterator	iter;
+
+	for (iter = _data.begin(); iter != _data.end(); iter++) {
+		std::cout << iter->first << " | " << iter->second << std::endl;
+	}
 };
 
 BitcoinExchange::BitcoinExchange( std::string input ) {
@@ -43,7 +52,7 @@ BitcoinExchange::BitcoinExchange( std::string input ) {
 		std::cerr << input << " could not open." << std::endl;
 		return	;
 	}
-	
+
 	while (std::getline(data, buff)) {
 		std::stringstream	format;
 		std::replace(buff.begin(), buff.end(), '|', ' ');
@@ -51,8 +60,9 @@ BitcoinExchange::BitcoinExchange( std::string input ) {
 		format >> mapbuff[0];
 		format >> mapbuff[1];
 		_input[mapbuff[0]] = mapbuff[1];
-		// std::cout << mapbuff[0] << " () " << mapbuff[1] << std::endl;
+		// std::cout << mapbuff[0] << " 0 " << mapbuff[1] << std::endl;
 	};
+	data.close();
 };
 
 BitcoinExchange::~BitcoinExchange() {};

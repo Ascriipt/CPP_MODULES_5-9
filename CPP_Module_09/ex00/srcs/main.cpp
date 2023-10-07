@@ -6,7 +6,7 @@
 /*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 19:28:14 by uniix             #+#    #+#             */
-/*   Updated: 2023/10/06 16:59:39 by uniix            ###   ########.fr       */
+/*   Updated: 2023/10/07 18:45:03 by uniix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@ int main( int ac, char **av ) {
 		std::cout << "Error : couldn't open file" << std::endl;
 		return	1;
 	}
-	BitcoinExchange a(av[0]);
+	BitcoinExchange a(av[1]);
+	a.printData();
 }
