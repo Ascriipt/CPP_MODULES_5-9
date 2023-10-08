@@ -6,7 +6,7 @@
 /*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 19:51:21 by uniix             #+#    #+#             */
-/*   Updated: 2023/10/07 23:55:48 by uniix            ###   ########.fr       */
+/*   Updated: 2023/10/08 04:16:14 by uniix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,14 @@ void	BitcoinExchange::printData() {
 	std::multimap<std::string, std::string>::iterator	iter;
 
 	for (iter = _input.begin(); iter != _input.end(); iter++) {
-		std::cout << iter->first << " | " << iter->second << std::endl;
-		isValidDateFormat(iter->first);
+		// std::cout << iter->first << " | " << iter->second << std::endl;
+		if (isValidDateFormat( iter->first ) == true && isValidNumber( std::atof( iter->second.c_str() ) )) {
+			std::cout << iter->first << " => " << iter->second << " = " << std::atof( iter->second.c_str() ) << std::endl;
+		}
 	}
 };
 
-bool	BitcoinExchange::isValidDateFormat(const std::string& date) {
+bool	BitcoinExchange::isValidDateFormat( const std::string & date ) {
     if (date.length() != 10)
         return false;
 
@@ -96,11 +98,22 @@ bool	BitcoinExchange::isValidDateFormat(const std::string& date) {
         } else if ((month == 4 || month == 6 || month == 9 || month == 11)) {
             return day <= 30;
         }
-		std::cout << date << " is valid" << std::endl;
         return true;
     }
-	std::cout << date << " is not valid" << std::endl;
+	std::cerr << "Error: invalid date" << date << std::endl;
     return false;
+};
+
+bool	BitcoinExchange::isValidNumber( float n ) {
+	if (n < 1) {
+		std::cerr << "Error: not a positive number" << std::endl;
+		return	false;
+	}
+	if (n > 1000) {
+		std::cerr << "Error: too large a number" << std::endl;
+		return	false;
+	}
+	return	true;
 };
 
 BitcoinExchange::~BitcoinExchange() {};

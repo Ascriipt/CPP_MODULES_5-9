@@ -6,7 +6,7 @@
 /*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:04:38 by uniix             #+#    #+#             */
-/*   Updated: 2023/10/07 23:52:54 by uniix            ###   ########.fr       */
+/*   Updated: 2023/10/08 04:06:31 by uniix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ class BitcoinExchange {
 		BitcoinExchange();
 		BitcoinExchange( const BitcoinExchange & old );
 		BitcoinExchange & operator=( const BitcoinExchange & old );
-		
+
+		bool	isValidNumber( float n );
 		bool	isValidDateFormat( const std::string & date );
 		void	checkFormat( const std::multimap<std::string, std::string>::iterator & one );
 		void	matchOneData( const std::multimap<std::string, std::string>::iterator & one );
