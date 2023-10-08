@@ -6,14 +6,17 @@
 /*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:04:38 by uniix             #+#    #+#             */
-/*   Updated: 2023/10/08 04:06:31 by uniix            ###   ########.fr       */
+/*   Updated: 2023/10/09 00:31:33 by uniix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <map>
+#include <cmath>
 #include <string>
+#include <limits>
+#include <cstring>
 #include <iomanip>
 #include <fstream>
 #include <sstream>
@@ -31,6 +34,10 @@ class BitcoinExchange {
 
 		bool	isValidNumber( float n );
 		bool	isValidDateFormat( const std::string & date );
+
+
+		void	Init();
+		void	matchData( const std::multimap<std::string, std::string>::iterator & Iter );
 		void	checkFormat( const std::multimap<std::string, std::string>::iterator & one );
 		void	matchOneData( const std::multimap<std::string, std::string>::iterator & one );
 
@@ -44,9 +51,7 @@ class BitcoinExchange {
 					return	("Format Error\n");
 				};
 		};
-		void	Init();
 		void	printData();
-		void	matchData();
 };
 
 // grave c'est exactement mon wallet en plus

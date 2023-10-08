@@ -6,7 +6,7 @@
 /*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 19:51:21 by uniix             #+#    #+#             */
-/*   Updated: 2023/10/08 04:16:14 by uniix            ###   ########.fr       */
+/*   Updated: 2023/10/09 01:18:13 by uniix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ BitcoinExchange::BitcoinExchange( std::string input ) {
 		format << buff;
 		format >> mapbuff[0];
 		format >> mapbuff[1];
+		if ( buff.length() <= 13 )
+			mapbuff[1] = "null";
+		else if ( !std::isdigit(buff.at(13)) && buff.at(13) != '-' )
+			continue;
 		_input.insert(std::make_pair(mapbuff[0], mapbuff[1]));
 		// std::cout << mapbuff[0] << " " << mapbuff[1] << std::endl;
 	};
@@ -64,10 +68,62 @@ void	BitcoinExchange::printData() {
 
 	for (iter = _input.begin(); iter != _input.end(); iter++) {
 		// std::cout << iter->first << " | " << iter->second << std::endl;
+		// if ( iter->second == "null" ) {
+		// 	std::cerr << "Error: Bad Input => " << iter->first << std::endl;
+		// 	continue	;
+		// }
 		if (isValidDateFormat( iter->first ) == true && isValidNumber( std::atof( iter->second.c_str() ) )) {
-			std::cout << iter->first << " => " << iter->second << " = " << std::atof( iter->second.c_str() ) << std::endl;
+			matchData( iter );
 		}
 	}
+};
+
+void BitcoinExchange::matchData(const std::multimap<std::string, std::string>::iterator &Iter) {
+    struct tm inputTime;
+    memset(&inputTime, 0, sizeof(inputTime));
+    if (sscanf(Iter->first.c_str(), "%4d-%2d-%2d", &inputTime.tm_year, &inputTime.tm_mon, &inputTime.tm_mday) != 3) {
+        std::cerr << "Error: Invalid Date Format => " << Iter->first << std::endl;
+        return;
+    }
+
+    inputTime.tm_year -= 1900;
+    inputTime.tm_mon -= 1;
+
+    time_t inputDateValue = mktime(&inputTime);
+
+    std::multimap<double, std::string> dateDifferences;
+    std::string closestDate;
+
+    for (std::multimap<std::string, std::string>::iterator dataIter = _data.begin(); dataIter != _data.end(); dataIter++) {
+        struct tm dataTime;
+        memset(&dataTime, 0, sizeof(dataTime));
+        if (sscanf(dataIter->first.c_str(), "%4d-%2d-%2d", &dataTime.tm_year, &dataTime.tm_mon, &dataTime.tm_mday) != 3) {
+            continue;
+        }
+
+        dataTime.tm_year -= 1900;
+        dataTime.tm_mon -= 1;
+
+        time_t dataDateValue = mktime(&dataTime);
+
+        if (dataDateValue <= inputDateValue) { // Change to <= to match on the same date
+            double dateDifference = fabs(difftime(inputDateValue, dataDateValue));
+            dateDifferences.insert(std::make_pair(dateDifference, dataIter->first));
+        }
+    }
+
+    if (!dateDifferences.empty()) {
+        std::multimap<double, std::string>::iterator closestIter = dateDifferences.begin();
+        closestDate = closestIter->second;
+    }
+
+    if (!closestDate.empty()) {
+        // Print the closest (earlier) date or the exact same date if there is a match
+        std::cout << closestDate << " => " << atof(Iter->second.c_str()) << " = " <<
+            atof(_data.find(closestDate)->second.c_str()) * atof(Iter->second.c_str()) << std::endl;
+    } else {
+        std::cerr << "No valid data dates found before or on the input date." << std::endl;
+    }
 };
 
 bool	BitcoinExchange::isValidDateFormat( const std::string & date ) {
@@ -100,7 +156,7 @@ bool	BitcoinExchange::isValidDateFormat( const std::string & date ) {
         }
         return true;
     }
-	std::cerr << "Error: invalid date" << date << std::endl;
+	std::cerr << "Error: invalid date => " << date << std::endl;
     return false;
 };
 
