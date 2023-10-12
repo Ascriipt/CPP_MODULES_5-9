@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:12:58 by maparigi          #+#    #+#             */
-/*   Updated: 2023/10/12 18:12:19 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:31:48 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ class BitcoinExchange {
 
 		void initDataBase();
 		void fillDatabase();
-		void initFile(const char *fileName);
-		void fillDate(const std::string line);
-		void exchange(const std::string line) const;
+		void initFile( const char *fileName );
+		void fillDate( const std::string line );
+		void exchange( const std::string line ) const;
 		void displayFile(std::ifstream &file) const;
 		void checkDateFormat(const std::string &date) const;
 		void checkValueRequirements(const float value) const;
@@ -62,8 +62,8 @@ class BitcoinExchange {
 		std::string findClosestDate(const std::map<std::string, float>& myMap, const std::string& input) const;
 
 		BitcoinExchange();
-		BitcoinExchange(const BitcoinExchange &bigcoinExchange);
-		BitcoinExchange &operator=(const BitcoinExchange &bigcoinExchange);
+		BitcoinExchange( const BitcoinExchange &bigcoinExchange );
+		BitcoinExchange &operator=( const BitcoinExchange &bigcoinExchange );
 
 	public:
 		BitcoinExchange( const int ac, const char *fileName );

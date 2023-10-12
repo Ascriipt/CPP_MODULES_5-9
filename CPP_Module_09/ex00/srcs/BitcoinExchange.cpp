@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:10:20 by maparigi          #+#    #+#             */
-/*   Updated: 2023/10/12 18:30:07 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:52:46 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ BitcoinExchange::~BitcoinExchange() {
 	_file.close();
 	_database.close();
 	if (PRINT_DEBUG) {
-		std::cout << PURPLE << "BitcoinExchange " << NC << "has been " <<
-		RED << "destroyed" << NC << std::endl;
+		std::cout << "an instance of " << PURPLE << "BitcoinExchange " << NC
+		<< "has been " << RED << "destroyed" << NC << std::endl;
 	}
 }
 
