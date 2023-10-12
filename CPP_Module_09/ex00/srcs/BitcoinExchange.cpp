@@ -3,173 +3,221 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
+/*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 19:51:21 by uniix             #+#    #+#             */
-/*   Updated: 2023/10/09 01:18:13 by uniix            ###   ########.fr       */
+/*   Created: 2023/10/12 16:10:20 by maparigi          #+#    #+#             */
+/*   Updated: 2023/10/12 18:30:07 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-void	BitcoinExchange::Init() {
-	std::ifstream	data("data.csv");
-	std::string		mapbuff[2];
-	std::string		buff;
+static void	resetFile(std::ifstream &file) {
 
-	if (!data.is_open()) {
-		std::cerr << "data.csv could not open." << std::endl;
-		return	;
-	}
-	
-	while (std::getline(data, buff)) {
-		std::stringstream	format;
-		std::replace(buff.begin(), buff.end(), ',', ' ');
-		format << buff;
-		format >> mapbuff[0];
-		format >> mapbuff[1];
-		_data.insert(std::make_pair(mapbuff[0], mapbuff[1]));
-		// std::cout << mapbuff[0] << " () " << mapbuff[1] << std::endl;
-	};
-	data.close();
-};
+	file.clear();
+	file.seekg(0);
+}
 
-BitcoinExchange::BitcoinExchange( std::string input ) {
-	std::ifstream	data(input.c_str());
-	std::string		mapbuff[2];
-	std::string		buff;
+static std::string removeWhiteSpaces(const std::string str) {
 
-	Init();
-	if (!data.is_open()) {
-		std::cerr << input << " could not open." << std::endl;
-		return	;
-	}
+	std::string	newStr;
 
-	while (std::getline(data, buff)) {
-		std::stringstream	format;
-		std::replace(buff.begin(), buff.end(), '|', ' ');
-		// std::cout << "Read line: " << buff << std::endl;
-		format << buff;
-		format >> mapbuff[0];
-		format >> mapbuff[1];
-		if ( buff.length() <= 13 )
-			mapbuff[1] = "null";
-		else if ( !std::isdigit(buff.at(13)) && buff.at(13) != '-' )
-			continue;
-		_input.insert(std::make_pair(mapbuff[0], mapbuff[1]));
-		// std::cout << mapbuff[0] << " " << mapbuff[1] << std::endl;
-	};
-	data.close();
-	printData();
-};
-
-void	BitcoinExchange::printData() {
-	std::multimap<std::string, std::string>::iterator	iter;
-
-	for (iter = _input.begin(); iter != _input.end(); iter++) {
-		// std::cout << iter->first << " | " << iter->second << std::endl;
-		// if ( iter->second == "null" ) {
-		// 	std::cerr << "Error: Bad Input => " << iter->first << std::endl;
-		// 	continue	;
-		// }
-		if (isValidDateFormat( iter->first ) == true && isValidNumber( std::atof( iter->second.c_str() ) )) {
-			matchData( iter );
+	for (size_t i = 0; i < str.size(); ++i) {
+		if (!std::isspace(str[i])) {
+			newStr += str[i];
 		}
 	}
-};
+	return newStr;
+}
 
-void BitcoinExchange::matchData(const std::multimap<std::string, std::string>::iterator &Iter) {
-    struct tm inputTime;
-    memset(&inputTime, 0, sizeof(inputTime));
-    if (sscanf(Iter->first.c_str(), "%4d-%2d-%2d", &inputTime.tm_year, &inputTime.tm_mon, &inputTime.tm_mday) != 3) {
-        std::cerr << "Error: Invalid Date Format => " << Iter->first << std::endl;
-        return;
-    }
-
-    inputTime.tm_year -= 1900;
-    inputTime.tm_mon -= 1;
-
-    time_t inputDateValue = mktime(&inputTime);
-
-    std::multimap<double, std::string> dateDifferences;
-    std::string closestDate;
-
-    for (std::multimap<std::string, std::string>::iterator dataIter = _data.begin(); dataIter != _data.end(); dataIter++) {
-        struct tm dataTime;
-        memset(&dataTime, 0, sizeof(dataTime));
-        if (sscanf(dataIter->first.c_str(), "%4d-%2d-%2d", &dataTime.tm_year, &dataTime.tm_mon, &dataTime.tm_mday) != 3) {
-            continue;
-        }
-
-        dataTime.tm_year -= 1900;
-        dataTime.tm_mon -= 1;
-
-        time_t dataDateValue = mktime(&dataTime);
-
-        if (dataDateValue <= inputDateValue) { // Change to <= to match on the same date
-            double dateDifference = fabs(difftime(inputDateValue, dataDateValue));
-            dateDifferences.insert(std::make_pair(dateDifference, dataIter->first));
-        }
-    }
-
-    if (!dateDifferences.empty()) {
-        std::multimap<double, std::string>::iterator closestIter = dateDifferences.begin();
-        closestDate = closestIter->second;
-    }
-
-    if (!closestDate.empty()) {
-        // Print the closest (earlier) date or the exact same date if there is a match
-        std::cout << closestDate << " => " << atof(Iter->second.c_str()) << " = " <<
-            atof(_data.find(closestDate)->second.c_str()) * atof(Iter->second.c_str()) << std::endl;
-    } else {
-        std::cerr << "No valid data dates found before or on the input date." << std::endl;
-    }
-};
-
-bool	BitcoinExchange::isValidDateFormat( const std::string & date ) {
-    if (date.length() != 10)
-        return false;
-
-    if (date[4] != '-' || date[7] != '-')
-        return false;
-
-    std::string yearStr = date.substr(0, 4);
-    std::string monthStr = date.substr(5, 2);
-    std::string dayStr = date.substr(8, 2);
-
-    int year, month, day;
-    if (!(std::istringstream(yearStr) >> year) || 
-        !(std::istringstream(monthStr) >> month) || 
-        !(std::istringstream(dayStr) >> day)) {
-        return false;
-    }
-
-    if (year >= 1 && month >= 1 && month <= 12 && day >= 1 && day <= 31) {
-        if (month == 2) {
-            if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
-                return day <= 29;
-            } else {
-                return day <= 28;
-            }
-        } else if ((month == 4 || month == 6 || month == 9 || month == 11)) {
-            return day <= 30;
-        }
-        return true;
-    }
-	std::cerr << "Error: invalid date => " << date << std::endl;
-    return false;
-};
-
-bool	BitcoinExchange::isValidNumber( float n ) {
-	if (n < 1) {
-		std::cerr << "Error: not a positive number" << std::endl;
-		return	false;
+static std::string findClosestKey(const std::map<std::string, float>& myMap, const std::string& inputKey) {
+	std::string closestKey = "";  // Initialize with an empty key
+	for (std::map<std::string, float>::const_iterator it = myMap.begin(); it != myMap.end(); ++it) {
+		if (it->first < inputKey) {
+			closestKey = it->first;
+		} else {
+			// Since the keys are sorted, we break as soon as we find a key greater than the input
+			break;
+		}
 	}
-	if (n > 1000) {
-		std::cerr << "Error: too large a number" << std::endl;
-		return	false;
-	}
-	return	true;
-};
+	return closestKey;
+}
 
-BitcoinExchange::~BitcoinExchange() {};
+static bool isValidDateFormat(const std::string& date) {
+
+	// Check the format: YYYY-MM-DD
+	if (date.length() != 10 || date[4] != '-' || date[7] != '-') {
+		return false;
+	}
+
+	// Check if each character is a digit
+	for (int i = 0; i < 10; ++i) {
+		if (i != 4 && i != 7 && !isdigit(date[i])) {
+			return false;
+		}
+	}
+	return true;
+}
+
+BitcoinExchange::BitcoinExchange( const int ac, const char *filename ) {
+
+	if ( ac > 2 )
+		throw	BitcoinExchange::TooManyArguments();
+	else if ( ac < 2 )
+		throw	BitcoinExchange::TooFewArguments();
+	initDataBase();
+	initFile( filename );
+	if ( PRINT_DEBUG ) {
+		std::cout << "an instance of " << PURPLE << "BitcoinExchange " << NC
+		<< "has been " << GREEN << "created" << NC << "." << std::endl;
+	}
+}
+
+void BitcoinExchange::displayConversion() {
+
+	std::string line;
+
+	while (std::getline(_file, line)) {
+		try {
+			exchange(line);
+		}
+		catch (std::exception &e) {
+			std::cout << "Error: " << e.what() << std::endl;
+		}
+	}
+}
+
+BitcoinExchange::~BitcoinExchange() {
+
+	_file.close();
+	_database.close();
+	if (PRINT_DEBUG) {
+		std::cout << PURPLE << "BitcoinExchange " << NC << "has been " <<
+		RED << "destroyed" << NC << std::endl;
+	}
+}
+
+BitcoinExchange::BadInput::BadInput( const std::string &message ) {
+	_errorMessage = BAD_INPUT_ERR_M + message;
+}
+
+BitcoinExchange::BadInput::~BadInput() throw() {}
+
+const char *BitcoinExchange::BadInput::what() const throw() {
+	return _errorMessage.c_str();
+}
+
+BitcoinExchange::InvalidDateFormat::InvalidDateFormat(const std::string &message) {
+	_errorMessage = INVALID_DATE_ERR_M + message;
+}
+
+BitcoinExchange::InvalidDateFormat::~InvalidDateFormat() throw() {}
+
+const char *BitcoinExchange::InvalidDateFormat::what() const throw() {
+	return _errorMessage.c_str();
+}
+
+void BitcoinExchange::initDataBase() {
+
+	std::ifstream file(DB_NAME);
+	if (!file.is_open()) {
+		throw BitcoinExchange::InvalidDatabase();
+	}
+	file.close();
+	_database.open(DB_NAME);
+	fillDatabase();
+}
+
+void BitcoinExchange::initFile(const char *fileName) {
+
+	std::ifstream file(fileName);
+	if (!file.is_open()) {
+		throw BitcoinExchange::InvalidFile();
+	}
+	file.close();
+	_fileName = fileName;
+	_file.open(fileName);
+}
+
+void BitcoinExchange::fillDate(const std::string line) {
+	
+	std::string lineWithoutSpaces = removeWhiteSpaces(line);
+	std::size_t separatorPos = line.find_first_of(DB_SEPARATORS);
+
+	if (separatorPos != std::string::npos) {
+		std::string datePart = lineWithoutSpaces.substr(0, separatorPos);
+		std::string valuePart = lineWithoutSpaces.substr(separatorPos + 1);
+
+		std::istringstream valueStream(valuePart);
+		float value;
+		if (valueStream >> value) {
+			checkDateFormat(datePart);
+			_dataMap[datePart] = value;
+			return;
+		}
+	}
+	else {throw InvalidDatabase();}
+}
+
+void BitcoinExchange::fillDatabase() {
+
+	std::string	line;
+
+	while (std::getline(_database, line)) {
+		fillDate(line);
+	}
+	resetFile(_database);
+}
+
+void BitcoinExchange::displayFile(std::ifstream &file) const {
+	
+	std::string	line;
+	while (std::getline(file, line)) {
+		std::cout << line << std::endl;
+	}
+	resetFile(file);
+}
+
+void BitcoinExchange::checkDateFormat(const std::string &date) const {
+
+	if (!isValidDateFormat(date))
+		throw InvalidDateFormat(date);
+}
+
+void BitcoinExchange::checkValueRequirements(const float value) const {
+
+	if (value < 0)
+		throw NegativeValue();
+	if (value > 100)
+		throw TooLargeValue();
+}
+
+std::string BitcoinExchange::findClosestDate(const std::map<std::string, float>& myMap, const std::string& input) const {
+
+	std::string closestDate = findClosestKey(myMap, input);
+
+	if (closestDate.empty())
+		throw TooEarlyDate();
+	return closestDate;
+}
+
+void BitcoinExchange::exchange(const std::string line) const {
+	
+	std::string lineWithoutSpaces = removeWhiteSpaces( line );
+	std::size_t separatorPos = lineWithoutSpaces.find_first_of( SEPARATORS );
+
+	if (separatorPos != std::string::npos) {
+		std::string datePart = lineWithoutSpaces.substr(0, separatorPos);
+		std::string valuePart = lineWithoutSpaces.substr(separatorPos + 1);
+
+		std::istringstream valueStream(valuePart);
+		float value;
+		if ( valueStream >> value ) {
+			checkDateFormat( datePart );
+			checkValueRequirements( value );
+			std::string closestDate = findClosestDate( _dataMap, datePart );
+			std::cout << closestDate << " => " << value
+				<< " = " << value * _dataMap.at( closestDate ) << std::endl;
+		}
+	} else {throw BadInput(line);}
+}

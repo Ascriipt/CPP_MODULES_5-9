@@ -3,20 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uniix <uniix@student.42.fr>                +#+  +:+       +#+        */
+/*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/27 19:28:14 by uniix             #+#    #+#             */
-/*   Updated: 2023/10/09 00:17:09 by uniix            ###   ########.fr       */
+/*   Created: 2023/10/12 16:13:05 by maparigi          #+#    #+#             */
+/*   Updated: 2023/10/12 16:41:25 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-int main( int ac, char **av ) {
-	if ( ac != 2 ) {
-		std::cout << "Error : couldn't open file" << std::endl;
-		return	1;
+int	main(int ac, char **av)
+{
+	try {
+		BitcoinExchange bitcoin( ac, av[1] );
+		bitcoin.displayConversion();
 	}
-	BitcoinExchange a(av[1]);
-	// a.printData();
+	catch (std::exception &e) {
+		std::cout << "Error : " << e.what() << std::endl;
+		return EXIT_FAILURE;
+	}
+	return EXIT_SUCCESS;
 }

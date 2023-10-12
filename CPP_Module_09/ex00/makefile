@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: uniix <uniix@student.42.fr>                +#+  +:+       +#+         #
+#    By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 18:52:45 by maparigi          #+#    #+#              #
-#    Updated: 2023/10/06 14:57:13 by uniix            ###   ########.fr        #
+#    Updated: 2023/10/12 18:39:50 by maparigi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,14 @@ CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -MMD
 
 all:	${NAME}
 
+debug:	CPPFLAGS += -DPRINT_DEBUG=true
+debug:	${NAME}
+
+${DEBUG}:	${OBJ}
+
+	@${CC} -DPRINT_DEBUG=true ${CPPFLAGS} -I${INC} ${OBJ} -o ${NAME}
+	@echo "${Red}${Blink}- ${NAME} ready.${NC}"	
+
 ${NAME}:	${OBJ}
 
 	@${CC} ${CPPFLAGS} -I${INC} ${OBJ} -o ${NAME}
@@ -61,4 +69,4 @@ re: fclean all
 
 -include : ${DEPS}
 
-.PHONY: all clean fclean re bonus aclean
+.PHONY: all clean fclean re bonus aclean debug
