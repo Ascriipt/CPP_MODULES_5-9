@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:10:20 by maparigi          #+#    #+#             */
-/*   Updated: 2023/10/12 19:52:46 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:26:24 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,19 @@ static std::string removeWhiteSpaces(const std::string str) {
 static std::string findClosestKey(const std::map<std::string, float>& myMap, const std::string& inputKey) {
 	std::string closestKey = "";  // Initialize with an empty key
 	for (std::map<std::string, float>::const_iterator it = myMap.begin(); it != myMap.end(); ++it) {
-		if (it->first < inputKey) {
+		if (it->first < inputKey)
 			closestKey = it->first;
-		} else {
-			// Since the keys are sorted, we break as soon as we find a key greater than the input
+		else
 			break;
-		}
 	}
 	return closestKey;
 }
 
 static bool isValidDateFormat(const std::string& date) {
 
-	// Check the format: YYYY-MM-DD
 	if (date.length() != 10 || date[4] != '-' || date[7] != '-') {
 		return false;
 	}
-
-	// Check if each character is a digit
 	for (int i = 0; i < 10; ++i) {
 		if (i != 4 && i != 7 && !isdigit(date[i])) {
 			return false;

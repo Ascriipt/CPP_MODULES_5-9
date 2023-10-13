@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:12:58 by maparigi          #+#    #+#             */
-/*   Updated: 2023/10/12 19:31:48 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:21:39 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <algorithm>
 
 #define DB_NAME				"data.csv"
 #define SEPARATORS			"|"
