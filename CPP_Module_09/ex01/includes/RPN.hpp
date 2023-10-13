@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 08:53:22 by rbroque           #+#    #+#             */
-/*   Updated: 2023/10/12 20:41:08 by maparigi         ###   ########.fr       */
+/*   Created: 2023/10/13 14:50:21 by maparigi          #+#    #+#             */
+/*   Updated: 2023/10/13 14:50:23 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@
 #define RED		"\033[0;31m"
 #define GREEN	"\033[0;32m"
 #define PURPLE	"\033[0;35m" 
-
-#define ASCII_NB_SHIFT		48
-#define OPERATORS			"+-*/"
 
 #ifndef PRINT_DEBUG
 # define PRINT_DEBUG false

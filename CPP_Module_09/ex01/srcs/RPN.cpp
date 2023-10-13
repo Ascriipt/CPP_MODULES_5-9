@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 08:53:48 by rbroque           #+#    #+#             */
-/*   Updated: 2023/10/12 20:43:15 by maparigi         ###   ########.fr       */
+/*   Created: 2023/10/13 14:50:40 by maparigi          #+#    #+#             */
+/*   Updated: 2023/10/13 14:50:41 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,14 @@ RPN::RPN(const int ac, const char *input) {
 	displayResult();
 }
 
+static int getOperand(const std::string &op) {
+	if (op.size() == 1 && isdigit(op[0]))
+		return op[0] - 48;
+	throw RPN::UnexpectedToken();
+}
+
 static bool isOperator(const std::string &token) {
-	return token.size() == 1 && token.find_first_of(OPERATORS) != std::string::npos;
+	return token.size() == 1 && token.find_first_of( "+-*/" ) != std::string::npos;
 }
 
 static int addition(const int nb1, const int nb2) {
@@ -65,16 +71,9 @@ static int performOperation(const int nb1, const int nb2, const std::string &op)
 		multiplication,
 		division
 	};
-	static std::string operators = OPERATORS;
+	static std::string operators = "+-*/";
 	return operations[operators.find(op)](nb1, nb2);
 }
-
-static int getOperand(const std::string &op) {
-	if (op.size() == 1 && isdigit(op[0]))
-		return op[0] - ASCII_NB_SHIFT;
-	throw RPN::UnexpectedToken();
-}
-
 
 void	RPN::displayResult() {
 
