@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:50:40 by maparigi          #+#    #+#             */
-/*   Updated: 2023/10/13 14:50:41 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/10/14 23:18:28 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static bool isOperator(const std::string &token) {
 
 static int addition(const int nb1, const int nb2) {
 
-	if (nb1 > INT_MAX - nb2)
+	if (static_cast<long>(nb1) + static_cast<long>(nb2) > INT_MAX)
 		throw RPN::Overflow();
 	return (nb1 + nb2);
 }
@@ -51,13 +51,14 @@ static int substraction(const int nb1, const int nb2) {
 static int multiplication(const int nb1, const int nb2) {
 
 	if (nb1 != 0 && nb2 != 0) {
-		if (nb1 > INT_MAX / nb2)
+		if (static_cast<long>(nb1) * static_cast<long>(nb2) > INT_MAX)
 			throw RPN::Overflow();
 	}
 	return (nb1 * nb2);
 }
 
 static int division(const int nb1, const int nb2) {
+
 	if (nb2 == 0)
 		throw RPN::DivisionByZero();
 	return (nb1 / nb2);
