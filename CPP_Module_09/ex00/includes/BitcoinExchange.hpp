@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:12:58 by maparigi          #+#    #+#             */
-/*   Updated: 2023/10/13 15:21:39 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/10/14 22:41:23 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #include <iostream>
 #include <algorithm>
 
-#define DB_NAME				"data.csv"
 #define SEPARATORS			"|"
 #define DB_SEPARATORS		","
 
@@ -53,12 +52,12 @@ class BitcoinExchange {
 
 		void initDataBase();
 		void fillDatabase();
+		void execute( std::ifstream &file );
 		void initFile( const char *fileName );
 		void fillDate( const std::string line );
 		void exchange( const std::string line ) const;
-		void displayFile(std::ifstream &file) const;
-		void checkDateFormat(const std::string &date) const;
-		void checkValueRequirements(const float value) const;
+		void checkDateFormat( const std::string & date ) const;
+		void checkValueRequirements( const float value ) const;
 
 		std::string findClosestDate(const std::map<std::string, float>& myMap, const std::string& input) const;
 
@@ -87,12 +86,6 @@ class BitcoinExchange {
 			public:
 				const char *what() const throw() {
 					return	COULD_NOT_OPEN_ERR_M;
-				};
-		};
-		class InvalidDatabase: public std::exception {
-			public:
-				const char *what() const throw() {
-					return	INVALID_DB_ERR_M;
 				};
 		};
 		class NegativeValue: public std::exception {
