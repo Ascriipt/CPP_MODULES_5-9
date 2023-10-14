@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:10:20 by maparigi          #+#    #+#             */
-/*   Updated: 2023/10/14 22:49:51 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/10/14 23:45:27 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ static bool	isValidDateFormat( const std::string & date ) {
 BitcoinExchange::BitcoinExchange( const int ac, const char *filename ) {
 
     if ( ac > 2 )
-	throw	BitcoinExchange::TooManyArguments();
+	throw	BitcoinExchange::InvalidArgumentNumber();
     else if ( ac < 2 )
-	throw	BitcoinExchange::TooFewArguments();
+	throw	BitcoinExchange::InvalidArgumentNumber();
     initDataBase();
     initFile( filename );
     if ( PRINT_DEBUG ) {
@@ -89,11 +89,9 @@ void BitcoinExchange::displayConversion() {
     while (std::getline(_file, line)) {
 	try {
 	    exchange(line);
-	}
-	catch (std::exception &e) {
+	} catch (std::exception &e) {
 	    std::cout << "Error: " << e.what() << std::endl;
-	}
-    }
+	}}
 }
 
 BitcoinExchange::~BitcoinExchange() {
@@ -138,7 +136,7 @@ void BitcoinExchange::initFile(const char *fileName) {
 
     std::ifstream file(fileName);
     if (!file.is_open()) {
-	throw BitcoinExchange::InvalidFile();
+		throw BitcoinExchange::InvalidFile();
     }
     file.close();
     _fileName = fileName;
@@ -186,15 +184,15 @@ void BitcoinExchange::execute(std::ifstream &file) {
 void BitcoinExchange::checkDateFormat(const std::string &date) const {
 
     if (!isValidDateFormat(date))
-	throw InvalidDateFormat(date);
+		throw InvalidDateFormat(date);
 }
 
 void BitcoinExchange::checkValueRequirements(const float value) const {
 
     if (value < 0)
-	throw NegativeValue();
+		throw NegativeValue();
     if (value > 100)
-	throw TooLargeValue();
+		throw TooLargeValue();
 }
 
 std::string BitcoinExchange::findClosestDate(const std::map<std::string, float>& myMap, const std::string& input) const {
@@ -202,7 +200,7 @@ std::string BitcoinExchange::findClosestDate(const std::map<std::string, float>&
     std::string closestDate = findClosestKey(myMap, input);
 
     if (closestDate.empty())
-	throw TooEarlyDate();
+		throw TooEarlyDate();
     return closestDate;
 }
 

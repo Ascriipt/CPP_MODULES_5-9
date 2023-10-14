@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:12:58 by maparigi          #+#    #+#             */
-/*   Updated: 2023/10/14 22:41:23 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/10/14 23:39:41 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@
 #define BAD_INPUT_ERR_M			"bad input => "
 #define	INVALID_DB_ERR_M		"invalid database"
 #define WRONG_DATE_ERR_M		"no data for this date."
-#define TOO_FEW_ARG_ERR_M		"too few arguments."
 #define INVALID_DATE_ERR_M		"bad date format => "
-#define TOO_MANY_ARG_ERR_M		"too many arguments."
 #define COULD_NOT_OPEN_ERR_M	"could not open file."
+#define INV_ARG_NUMBER_ERR_M	"invalid number of arguments."
 
 #ifndef PRINT_DEBUG
 # define PRINT_DEBUG false
@@ -70,16 +69,10 @@ class BitcoinExchange {
 		~BitcoinExchange();
 
 		void displayConversion();
-		class TooFewArguments: public std::exception {
+		class InvalidArgumentNumber: public std::exception {
 			public:
 				const char *what() const throw() {
-					return	TOO_FEW_ARG_ERR_M;
-				};
-		};
-		class TooManyArguments: public std::exception {
-			public:
-				const char *what() const throw() {
-					return	TOO_MANY_ARG_ERR_M;
+					return	INV_ARG_NUMBER_ERR_M;
 				};
 		};
 		class InvalidFile: public std::exception {
