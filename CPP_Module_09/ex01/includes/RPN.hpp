@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:50:21 by maparigi          #+#    #+#             */
-/*   Updated: 2023/10/13 14:50:23 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:53:32 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@
 #include <iostream>
 
 #define OVERFLOW_ERR_M				"int overflow"
-#define MISSING_ARG_ERR_M			"missing argument"
-#define TOO_MANY_ARG_ERR_M			"too many arguments"
 #define	EMPTY_STRING_ERR_M			"the provided string is empty."
+#define INVALID_ARG_N_ERR_M			"wrong number of arguments"
 #define UNEXPECTED_TOK_ERR_M		"unexpected token"
 #define DIVISION_BY_ZERO_ERR_M		"division by zero"
 #define TOO_MANY_OPERANDS_ERR_M		"too many operands"
@@ -54,16 +53,10 @@ class RPN {
 
 		void displayResult();
 
-			class MissingArgument: public std::exception {
+			class ArgumentMissmanage: public std::exception {
 				public:
 					const char *what() const throw() {
-						return	MISSING_ARG_ERR_M;
-					};
-			};
-			class TooManyArgument: public std::exception {
-				public:
-					const char *what() const throw() {
-						return	TOO_MANY_ARG_ERR_M;
+						return	INVALID_ARG_N_ERR_M;
 					};
 			};
 			class InsufficientOperands: public std::exception {

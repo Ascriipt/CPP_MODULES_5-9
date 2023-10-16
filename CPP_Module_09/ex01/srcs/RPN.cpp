@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:50:40 by maparigi          #+#    #+#             */
-/*   Updated: 2023/10/14 23:18:28 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:54:13 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 RPN::RPN(const int ac, const char *input) {
 	if ( ac < 2 )
-		throw MissingArgument();
+		throw ArgumentMissmanage();
 	if ( ac > 2 )
-		throw TooManyArgument();
+		throw ArgumentMissmanage();
 	_input = static_cast< std::string >( input );
 	if ( _input.empty() )
 		throw	Empty();

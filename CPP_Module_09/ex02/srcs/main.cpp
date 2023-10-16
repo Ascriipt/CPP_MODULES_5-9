@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 18:33:45 by maparigi          #+#    #+#             */
-/*   Updated: 2023/10/15 18:55:46 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:50:18 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ using std::cout;
 using std::cerr;
 using std::endl;
 
-unsigned int ft_stou(const std::string& str)
-{
+unsigned int ft_stou(const std::string& str) {
 	unsigned int num;
 	std::stringstream ss(str);
 
@@ -30,8 +29,7 @@ unsigned int ft_stou(const std::string& str)
 	return num;
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 	if (argc == 1)
 	    return EXIT_SUCCESS;
     PmergeMe pmm;
