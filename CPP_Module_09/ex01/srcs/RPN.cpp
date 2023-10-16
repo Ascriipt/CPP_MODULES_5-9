@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:50:40 by maparigi          #+#    #+#             */
-/*   Updated: 2023/10/16 18:54:13 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:06:20 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	RPN::displayResult() {
 	std::stack<int> operands;
 	processStack( operands );
 	if ( operands.size() > 1 )
-		throw TooManyOperands();
+		throw OperandsMissmanage();
 	std::cout << operands.top() << std::endl;
 }
 
@@ -93,7 +93,7 @@ void RPN::processStack( std::stack<int> &operands ) const {
 
 		if (isOperator(token)) {
 			if (operands.size() < 2) {
-				throw InsufficientOperands();
+				throw OperandsMissmanage();
 			}
 			const int operand1 = operands.top();
 			operands.pop();

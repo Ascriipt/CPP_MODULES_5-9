@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:50:21 by maparigi          #+#    #+#             */
-/*   Updated: 2023/10/16 18:53:32 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:07:05 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@
 #define OVERFLOW_ERR_M				"int overflow"
 #define	EMPTY_STRING_ERR_M			"the provided string is empty."
 #define INVALID_ARG_N_ERR_M			"wrong number of arguments"
+#define WRONG_OPERAND_ERR_M			"wrong number of operands"
 #define UNEXPECTED_TOK_ERR_M		"unexpected token"
 #define DIVISION_BY_ZERO_ERR_M		"division by zero"
-#define TOO_MANY_OPERANDS_ERR_M		"too many operands"
-#define INSUFFICIENT_OPERANDS_ERR_M	"insufficient operands"
 
 #define NC		"\033[0m"
 #define RED		"\033[0;31m"
@@ -59,16 +58,10 @@ class RPN {
 						return	INVALID_ARG_N_ERR_M;
 					};
 			};
-			class InsufficientOperands: public std::exception {
+			class OperandsMissmanage: public std::exception {
 				public:
 					const char *what() const throw() {
-						return	INSUFFICIENT_OPERANDS_ERR_M;
-					};
-			};
-			class TooManyOperands: public std::exception {
-				public:
-					const char *what() const throw() {
-						return	TOO_MANY_OPERANDS_ERR_M;
+						return	WRONG_OPERAND_ERR_M;
 					};
 			};
 			class UnexpectedToken: public std::exception {
