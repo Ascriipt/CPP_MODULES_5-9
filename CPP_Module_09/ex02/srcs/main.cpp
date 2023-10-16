@@ -6,7 +6,7 @@
 /*   By: maparigi <maparigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 18:33:45 by maparigi          #+#    #+#             */
-/*   Updated: 2023/10/16 18:50:18 by maparigi         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:10:42 by maparigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@
 #include <string>
 #include <vector>
 #include "PmergeMe.hpp"
-
-using std::cout;
-using std::cerr;
-using std::endl;
 
 unsigned int ft_stou(const std::string& str) {
 	unsigned int num;
@@ -53,12 +49,12 @@ int main(int argc, char **argv) {
         }
     }
     catch (std::exception& e) {
-        cerr << e.what() << '\n';
+        std::cerr << e.what() << std::endl;
         return EXIT_FAILURE;
     }
 
     pmm.sortVec(argc, argv);
-    cout << endl;
+    std::cout << std::endl;
     pmm.sortList(argc, argv);
 
 	return EXIT_SUCCESS;
